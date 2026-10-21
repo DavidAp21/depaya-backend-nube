@@ -22,10 +22,10 @@
     </properties>
 
     <dependencies>
-        <!-- Gateway Reactivo Estándar -->
+        <!-- Gateway MVC (El que sí compila) -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <artifactId>spring-cloud-starter-gateway-server-webmvc</artifactId>
         </dependency>
 
         <!-- Cliente Eureka -->
@@ -34,7 +34,7 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-        <!-- Balanceador de carga (necesario para resolver los prefijos lb://) -->
+        <!-- Balanceador de carga -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
