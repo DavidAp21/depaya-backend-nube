@@ -7,23 +7,36 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.util.Arrays;
 import java.util.List;
-
 
 @Configuration
 public class CorsConfig {
 
-    @Bean
-    CorsFilter corsFilter(@Value("${depaya.cors.origenes}") List<String> origenes) {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(origenes);
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setExposedHeaders(List.of("Content-Disposition"));
-        config.setMaxAge(3600L);
+    // Lee las URLs permitidas desde tu application.properties
+    @Value("${depaya.cors.origenes}")
+    private List<String> corsOrigenes;
 
-        UrlBasedCorsConfigurationSource fuente = new UrlBasedCorsConfigurationSource();
-        fuente.registerCorsConfiguration("/**", config);
-        return new CorsFilter(fuente);
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration config = new CorsConfiguration();
+
+        // Asigna los orígenes leídos
+        config.setAllowedOrigins(corsOrigenes);
+
+        // Permite los métodos HTTP estándar
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+
+        // Permite todos los encabezados
+        config.setAllowedHeaders(Arrays.asList("*"));
+
+        // Permite credenciales (si usas tokens o cookies)
+        config.setAllowCredentials(true);
+
+        // Aplica esta configuración a todas las rutas de la API
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+
+        return new CorsFilter(source);
     }
 }
