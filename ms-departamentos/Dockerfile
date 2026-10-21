@@ -3,5 +3,6 @@ WORKDIR /app
 COPY . .
 RUN chmod +x mvnw
 ENV JAVA_TOOL_OPTIONS="-Xmx256m"
+ENV PORT=8080
 EXPOSE 8080
 CMD ["./mvnw", "spring-boot:run"]
