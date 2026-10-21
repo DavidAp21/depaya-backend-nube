@@ -2,7 +2,7 @@ FROM eclipse-temurin:21-jdk
 WORKDIR /app
 COPY . .
 RUN chmod +x mvnw
-ENV JAVA_TOOL_OPTIONS="-Xmx256m"
+RUN ./mvnw clean package -DskipTests
 ENV PORT=8080
 EXPOSE 8080
-CMD ["./mvnw", "spring-boot:run"]
+CMD sh -c 'java -Xmx256m -jar target/*.jar'
