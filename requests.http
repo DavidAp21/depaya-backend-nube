@@ -1,7 +1,7 @@
 ### DepaYa - peticiones de prueba (IntelliJ HTTP Client). Ejecutar de arriba hacia abajo.
 ### Todo entra por el gateway. Clave de los usuarios de ejemplo: 123456
 
-@host = http://localhost:8080
+@host = https://depaya-gateway.onrender.com
 
 ###############################################################################
 # 1. LOGIN Y REGISTRO (publico)
